@@ -30,8 +30,6 @@ function App() {
           </Routes>
         </div>
 
-        <Footer />
-
       </BrowserRouter>
       
     </div>
