@@ -1,6 +1,5 @@
-import {db} from "../firebase/config";
+import {db} from '../firebase/config.js';
 
-import { Form } from "react-router-dom";
 import{
     getAuth,
     createUserWithEmailAndPassword,
@@ -30,7 +29,7 @@ export const Autenticacao = ()=>{
         setLoading(true)
 
         try{
-            const {user} = createUserWithEmailAndPassword(
+            const {user} = await createUserWithEmailAndPassword(
                 auth,
                 data.email,
                 data.password
@@ -39,6 +38,7 @@ export const Autenticacao = ()=>{
             await updateProfile(user, {
                 nickname: data.nickname
             })
+            return user
 
         } catch (error){
             console.log(error.message)
