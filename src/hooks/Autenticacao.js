@@ -6,7 +6,7 @@ import{
     signInWithEmailAndPassword,
     updateProfile,
     signOut
-} from 'firebase/auth'
+} from 'firebase/auth';
 
 import { useState, useEffect } from "react";
 
@@ -27,12 +27,12 @@ export const Autenticacao = ()=>{
     const createUser = async (data) =>{
         checkIfIsCancelled()
         setLoading(true)
-
+        setError(null)
         try{
             const {user} = await createUserWithEmailAndPassword(
                 auth,
                 data.email,
-                data.password
+                data.senha
             )
 
             await updateProfile(user, {
@@ -42,7 +42,19 @@ export const Autenticacao = ()=>{
 
         } catch (error){
             console.log(error.message)
-            console.log(typeof error.messagem)
+            console.log(typeof error.message)
+        
+            let systemErrorMessage;
+
+            // if (error.message.includes("Password")){
+            //     systemErrorMessage = "A senha precisa ter pelos menos 6 caracteres."
+            // } else if (error.message.includes("email-already")){
+            //     systemErrorMessage = "E-mail já cadastrado"
+            // } else {
+            //     systemErrorMessage = "Ocorreu um erro, tente novamente mais tarde."
+            // }
+            // setError(systemErrorMessage)
+
         }
         setLoading(false);
     }

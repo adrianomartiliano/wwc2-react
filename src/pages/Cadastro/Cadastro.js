@@ -1,7 +1,7 @@
 import { Autenticacao } from "../../hooks/Autenticacao";
 import style from "./Cadastro.module.css";
 
-import {useState, useEffecct} from 'react';
+import {useState, useEffect} from 'react';
 
 const Cadastro = ()=> {
 
@@ -37,6 +37,12 @@ const Cadastro = ()=> {
 
         console.log(user);
     }
+
+    useEffect(()=>{
+        if(authError){
+            setError(authError);
+        }
+    }, [authError])
 
     return (
         <div >
@@ -108,9 +114,12 @@ const Cadastro = ()=> {
                 </div>
 
 
-                <div className={style.btnCadastro}>
+                {!loading && <div className={style.btnCadastro}>
                     <button>Cadastrar</button>
-                </div>
+                </div>}
+                {loading && <div className={style.btnCadastro}>
+                    <button disabled>Aguarde...</button>
+                </div>}
                 {error && <p className="error">{error}</p>}
                 
                 
